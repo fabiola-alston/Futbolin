@@ -1,11 +1,7 @@
-from tkinter import *
-from tkmacosx import *
-from PIL import Image, ImageTk
-import pygame
-
 from about import aboutRun
 from settings import settingsRun
 from team_select import teamSelectRun
+from game_assets import *
 
 def titleScreen():
     root = Tk()
@@ -15,28 +11,25 @@ def titleScreen():
     width = 800
     height = 600
     root.geometry(f"{width}x{height}+{round(screen_width/2)-int(width/2)}+{round(screen_height/2)-int(height/1.8)}")
-    root.resizable(False, False)
     root.configure(bg="black")
-    # root.eval("tk::PlaceWindow . center")
 
     # pygame music
-    pygame.mixer.init()
     pygame.mixer.music.load("Sounds/main_theme.mp3")
     pygame.mixer.music.play(-1)
 
-    # fonts
-    font1 = ("retro gaming", 16)
-
     # button functions
     def aboutScreen():
+        selectSound()
         root.withdraw()
         aboutRun(root)
 
     def settingsScreen():
+        selectSound()
         root.withdraw()
         settingsRun(root)
 
     def gameScreen():
+        selectSound()
         root.withdraw()
         teamSelectRun(root)
 
@@ -51,15 +44,15 @@ def titleScreen():
 
 
     play_button = Button(root, text="Play", font=font1, borderless=1, borderwidth=2, highlightthickness=3, relief="raised",
-                         bg="#ff0000", fg="white", overbackground="#59d600", focuscolor="#ff0000", activebackground="#59d600", padx=3, command=gameScreen)
+                         bg="#ff0000", fg="white", overbackground="#ff5252", focuscolor="#ff0000", activebackground="#ff5252", padx=3, command=gameScreen)
     play_button.place(relx=0.5, rely=0.65, anchor=CENTER)
 
     settings_button = Button(root, text="Settings", font=font1, borderless=1, borderwidth=2, highlightthickness=3, relief="raised",
-                         bg="#ff0000", fg="white", overbackground="#59d600", focuscolor="#ff0000", activebackground="#59d600", command=settingsScreen)
+                         bg="#ff0000", fg="white", overbackground="#ff5252", focuscolor="#ff0000", activebackground="#ff5252", padx=1, command=settingsScreen)
     settings_button.place(relx=0.5, rely=0.75, anchor=CENTER)
 
     about_button = Button(root, text="About", font=font1, borderless=1, borderwidth=2, highlightthickness=3, relief="raised",
-                         bg="#ff0000", fg="white", overbackground="#59d600", focuscolor="#ff0000", activebackground="#59d600", padx=3, command=aboutScreen)
+                         bg="#ff0000", fg="white", overbackground="#ff5252", focuscolor="#ff0000", activebackground="#ff5252", padx=3, command=aboutScreen)
     about_button.place(relx=0.5, rely=0.85, anchor=CENTER)
 
 

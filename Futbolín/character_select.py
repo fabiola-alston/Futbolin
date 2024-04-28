@@ -1,14 +1,15 @@
 from game_assets import *
 
-def settingsRun(root):
+def characterSelectRun(root, SELECT_TEAM):
     window = Toplevel(root)
-    window.title("Settings")
+    window.title("About")
     window.configure(background="black")
     screen_width = root.winfo_screenwidth()
     screen_height = root.winfo_screenheight()
     width = 800
     height = 600
-    window.geometry(f"{width}x{height}+{round(screen_width / 2) - int(width / 2)}+{round(screen_height / 2) - int(height / 1.8)}")
+    window.geometry(
+        f"{width}x{height}+{round(screen_width / 2) - int(width / 2)}+{round(screen_height / 2) - int(height / 1.8)}")
 
     def closeGame():
         window.destroy()
