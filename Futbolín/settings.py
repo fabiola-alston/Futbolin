@@ -19,6 +19,25 @@ def settingsRun(root):
         root.deiconify()
         window.destroy()
 
+    def musicOn():
+        pygame.mixer.music.set_volume(1)
+
+
+    def musicOff():
+        pygame.mixer.music.set_volume(0)
+
+    on_button = Button(window, text="On", font=font1, borderless=1, borderwidth=2, highlightthickness=3,
+                         relief="raised",
+                         bg="#ff0000", fg="white", overbackground="#ff5252", focuscolor="#ff0000",
+                         activebackground="#ff5252", command=musicOn)
+    on_button.place(relx=0.5, rely=0.4, anchor=CENTER)
+
+    off_button = Button(window, text="Off", font=font1, borderless=1, borderwidth=2, highlightthickness=3,
+                         relief="raised",
+                         bg="#ff0000", fg="white", overbackground="#ff5252", focuscolor="#ff0000",
+                         activebackground="#ff5252", command=musicOff)
+    off_button.place(relx=0.5, rely=0.5, anchor=CENTER)
+
     back_button = Button(window, text="Back", font=font1, borderless=1, borderwidth=2, highlightthickness=3,
                          relief="raised",
                          bg="#ff0000", fg="white", overbackground="#ff5252", focuscolor="#ff0000",

@@ -1,5 +1,5 @@
 from game_assets import *
-from game import gameRun
+from character_select import characterSelectRun
 
 def teamSelectRun(root):
     global SELECTED_TEAM
@@ -13,22 +13,22 @@ def teamSelectRun(root):
     window.configure(background="black")
 
     def selectSamurai():
-        SELECTED_TEAM = 0
-        selectSound()
-        window.destroy()
-        gameRun(root, SELECTED_TEAM)
-
-    def selectRealMadrid():
         SELECTED_TEAM = 1
         selectSound()
         window.destroy()
-        gameRun(root, SELECTED_TEAM)
+        characterSelectRun(root, SELECTED_TEAM)
 
-    def selectManchester():
+    def selectRealMadrid():
         SELECTED_TEAM = 2
         selectSound()
         window.destroy()
-        gameRun(root, SELECTED_TEAM)
+        characterSelectRun(root, SELECTED_TEAM)
+
+    def selectManchester():
+        SELECTED_TEAM = 3
+        selectSound()
+        window.destroy()
+        characterSelectRun(root, SELECTED_TEAM)
 
 
     title_label = Label(window, text="Select your team: ", font=font1, bg="black", fg="white")

@@ -1,6 +1,6 @@
 from game_assets import *
 
-def gameRun(root, SELECTED_TEAM):
+def gameRun(root, SELECTED_TEAM, SELECTED_ATTACKER, SELECTED_GOALIE):
     window = Toplevel(root)
     window.title("Game")
     window.configure(background="black")
@@ -10,7 +10,9 @@ def gameRun(root, SELECTED_TEAM):
     height = 600
     window.geometry(f"{width}x{height}+{round(screen_width / 2) - int(width / 2)}+{round(screen_height / 2) - int(height / 1.8)}")
 
-    print(SELECTED_TEAM)
+    print(f"GAME. SELECTED TEAM {SELECTED_TEAM}")
+    print(f"ATTACKER: {SELECTED_ATTACKER}")
+    print(f"GOALIE: {SELECTED_GOALIE}")
 
     def closeGame():
         window.destroy()

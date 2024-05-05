@@ -21,3 +21,9 @@ font1 = ("retro gaming", 16)
 # 1 = real madrid
 # 2 = manchester united
 SELECTED_TEAM = 0
+
+# selected goalie
+SELECTED_GOALIE = 0
+
+# selected attacker
+SELECTED_ATTACKER = 0

@@ -15,6 +15,7 @@ def titleScreen():
 
     # pygame music
     pygame.mixer.music.load("Sounds/main_theme.mp3")
+    # pygame.mixer.music.set_volume(0)
     pygame.mixer.music.play(-1)
 
     # button functions
