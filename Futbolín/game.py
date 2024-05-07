@@ -149,6 +149,7 @@ def gameRun(root, SELECTED_TEAM, SELECTED_ATTACKER, SELECTED_GOALIE, GAME_MODE, 
     player3 = game_canvas.create_image((150, 480), anchor=NW, image=player3_tk)
 
     def oppWin():
+        booSound()
         title = Label(game_canvas, text=f"OPPONENT WINS", font=font3, bg="black", fg="red")
         title.place(relx=0.5, rely=0.5, anchor=CENTER)
         game_canvas.update()
@@ -158,6 +159,7 @@ def gameRun(root, SELECTED_TEAM, SELECTED_ATTACKER, SELECTED_GOALIE, GAME_MODE, 
         game_canvas.update()
 
     def homeWin():
+        cheerSound()
         title = Label(game_canvas, text=f"HOME WINS", font=font3, bg="black", fg="blue")
         title.place(relx=0.5, rely=0.5, anchor=CENTER)
         game_canvas.update()
