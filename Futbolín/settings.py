@@ -26,6 +26,9 @@ def settingsRun(root):
     def musicOff():
         pygame.mixer.music.set_volume(0)
 
+    title_label = Label(window, text="Music: ", font=font1, bg="black", fg="white")
+    title_label.place(relx=0.5, rely=0.3, anchor=CENTER)
+
     on_button = Button(window, text="On", font=font1, borderless=1, borderwidth=2, highlightthickness=3,
                          relief="raised",
                          bg="#ff0000", fg="white", overbackground="#ff5252", focuscolor="#ff0000",

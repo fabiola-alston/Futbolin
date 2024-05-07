@@ -1,7 +1,7 @@
 from game_assets import *
 from board_data import randomBallData
 
-def gameRun(root, SELECTED_TEAM, SELECTED_ATTACKER, SELECTED_GOALIE, GAME_MODE, GOALIE_MODE):
+def gameRun(root, SELECTED_TEAM, SELECTED_ATTACKER, SELECTED_GOALIE, GAME_MODE, GOALIE_MODE, SELECTED_TEAM2, SELECTED_ATTACKER2, SELECTED_GOALIE2):
     window = Toplevel(root)
     window.title("Game")
     window.configure(background="black")
@@ -23,6 +23,13 @@ def gameRun(root, SELECTED_TEAM, SELECTED_ATTACKER, SELECTED_GOALIE, GAME_MODE, 
         directory = "Real Madrid"
     else:
         directory = "Manchester United"
+
+    if SELECTED_TEAM2 == 1:
+        directory2 = "Samurai Blue"
+    elif SELECTED_TEAM2 == 2:
+        directory2 = "Real Madrid"
+    else:
+        directory2 = "Manchester United"
 
     # to show attacker and goalie sprite
     attacker_dir = str(SELECTED_ATTACKER)
@@ -81,7 +88,7 @@ def gameRun(root, SELECTED_TEAM, SELECTED_ATTACKER, SELECTED_GOALIE, GAME_MODE, 
     home_score_label = Label(game_canvas, text=f"{directory.upper()}: {score}", font=font2, bg="black", fg="white")
     home_score_label.place(relx=0.18, rely=0.08, anchor=W)
 
-    opp_score_label = Label(game_canvas, text=f"OPPONENT: 0", font=font2, bg="black", fg="white")
+    opp_score_label = Label(game_canvas, text=f"{directory2.upper()}: 0", font=font2, bg="black", fg="white")
     opp_score_label.place(relx=0.18, rely=0.12, anchor=W)
 
     mode_label = Label(game_canvas, text=f"MODE: {mode}, {goalie_mode}", font=font2, bg="black", fg="white")
@@ -171,7 +178,7 @@ def gameRun(root, SELECTED_TEAM, SELECTED_ATTACKER, SELECTED_GOALIE, GAME_MODE, 
     def nextTeam():
         global score
         opp_score = random.randint(0, 5)
-        opp_score_label['text'] = f"OPPONENT: {opp_score}"
+        opp_score_label['text'] = f"{directory2.upper()}: {opp_score}"
 
         title = Label(game_canvas, text=f"Opponent scored {opp_score} goals.", font=font3, bg="black", fg="red")
         title.place(relx=0.5, rely=0.5, anchor=CENTER)
@@ -243,10 +250,9 @@ def gameRun(root, SELECTED_TEAM, SELECTED_ATTACKER, SELECTED_GOALIE, GAME_MODE, 
                 goalie_pos3 = 3
             elif goalie_ind == 1:
                 goalie_pos = 4
-                goalie_pos1 = 5
+                goalie_pos2 = 5
                 goalie_pos3 = 6
 
-        print(goalie_pos, goalie_pos2, goalie_pos3)
 
     def roundTitleAnimation():
         global title
@@ -283,6 +289,7 @@ def gameRun(root, SELECTED_TEAM, SELECTED_ATTACKER, SELECTED_GOALIE, GAME_MODE, 
                 game_canvas.after(1000, nextTeam)
         def displayTitle():
             global title
+            cheerSound()
             title = Label(game_canvas, text=f"GOAL", font=font3, bg="black", fg="blue")
             title.place(relx=0.5, rely=0.5, anchor=CENTER)
             game_canvas.after(2000, deleteTitle)
@@ -300,6 +307,7 @@ def gameRun(root, SELECTED_TEAM, SELECTED_ATTACKER, SELECTED_GOALIE, GAME_MODE, 
                 game_canvas.after(1000, nextTeam)
         def displayTitle():
             global title
+            booSound()
             title = Label(game_canvas, text=f"NO GOAL", font=font3, bg="black", fg="red")
             title.place(relx=0.5, rely=0.5, anchor=CENTER)
             game_canvas.after(2000, deleteTitle)

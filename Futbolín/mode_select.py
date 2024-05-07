@@ -1,5 +1,5 @@
 from game_assets import *
-from game import gameRun
+from game_start import preGameRun
 
 def modeRun(root, SELECTED_TEAM, SELECTED_ATTACKER, SELECTED_GOALIE):
     window = Toplevel(root)
@@ -29,7 +29,7 @@ def modeRun(root, SELECTED_TEAM, SELECTED_ATTACKER, SELECTED_GOALIE):
         selectSound()
         window.destroy()
         print(GOALIE_MODE)
-        gameRun(root, SELECTED_TEAM, SELECTED_ATTACKER, SELECTED_GOALIE, GAME_MODE, GOALIE_MODE)
+        preGameRun(root, SELECTED_TEAM, SELECTED_ATTACKER, SELECTED_GOALIE, GAME_MODE, GOALIE_MODE)
 
     def modeSelect(mode):
         selectSound()

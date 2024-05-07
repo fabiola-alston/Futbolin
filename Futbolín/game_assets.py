@@ -4,9 +4,21 @@ from PIL import Image, ImageTk
 import pygame
 import random
 import time
+import serial
 
 pygame.mixer.init()
 
+# raspberry pi port id
+# rpi = serial.Serial(port="", baudrate=115200)
+#
+# try:
+#     rpi.open()
+#     print("connected")
+# except:
+#     if(rpi.is_open()):
+#         print("connected")
+#     else:
+#         print("not connected")
 
 # select sound function
 def selectSound():
@@ -21,6 +33,16 @@ def shootSound():
 
 def dullSound():
     sound = pygame.mixer.Sound("Sounds/err.wav")
+    sound.set_volume(0.5)
+    pygame.mixer.Sound.play(sound)
+
+def cheerSound():
+    sound = pygame.mixer.Sound("Sounds/cheer.mp3")
+    sound.set_volume(0.5)
+    pygame.mixer.Sound.play(sound)
+
+def booSound():
+    sound = pygame.mixer.Sound("Sounds/boo.mp3")
     sound.set_volume(0.5)
     pygame.mixer.Sound.play(sound)
 
@@ -46,3 +68,8 @@ GAME_MODE = 1
 
 # GOALIE MODE (AN1 - AN2 - AN3)
 GOALIE_MODE = 2
+
+# TEAM 2 (RANDOMLY GENERATED)
+SELECTED_TEAM2 = 1
+SELECTED_ATTACKER2 = 1
+SELECTED_GOALIE2 = 1
