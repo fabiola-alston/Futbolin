@@ -1,5 +1,5 @@
 from game_assets import *
-from game import gameRun
+from mode_select import modeRun
 
 def characterSelectRun(root, SELECTED_TEAM):
     global SELECTED_ATTACKER
@@ -22,81 +22,36 @@ def characterSelectRun(root, SELECTED_TEAM):
     # determine sprites based on selected team
     # samurai blue
     if SELECTED_TEAM == 1:
-        at1 = Image.open("Images/Team Players/Samurai Blue/attacker1.png")
-        at1 = at1.resize((30, 60), 5)
-        at1_tk = ImageTk.PhotoImage(at1)
-
-        at2 = Image.open("Images/Team Players/Samurai Blue/attacker2.png")
-        at2 = at2.resize((30, 60), 5)
-        at2_tk = ImageTk.PhotoImage(at2)
-
-        at3 = Image.open("Images/Team Players/Samurai Blue/attacker3.png")
-        at3 = at3.resize((30, 60), 5)
-        at3_tk = ImageTk.PhotoImage(at3)
-
-        go1 = Image.open("Images/Team Players/Samurai Blue/goalie1.png")
-        go1 = go1.resize((30, 60), 5)
-        go1_tk = ImageTk.PhotoImage(go1)
-
-        go2 = Image.open("Images/Team Players/Samurai Blue/goalie2.png")
-        go2 = go2.resize((30, 60), 5)
-        go2_tk = ImageTk.PhotoImage(go2)
-
-        go3 = Image.open("Images/Team Players/Samurai Blue/goalie3.png")
-        go3 = go3.resize((30, 60), 5)
-        go3_tk = ImageTk.PhotoImage(go3)
-
-    # real madrid
+        team_directory = "Samurai Blue"
     elif SELECTED_TEAM == 2:
-        at1 = Image.open("Images/Team Players/Real Madrid/attacker1.png")
-        at1 = at1.resize((30, 60), 5)
-        at1_tk = ImageTk.PhotoImage(at1)
-
-        at2 = Image.open("Images/Team Players/Real Madrid/attacker2.png")
-        at2 = at2.resize((30, 60), 5)
-        at2_tk = ImageTk.PhotoImage(at2)
-
-        at3 = Image.open("Images/Team Players/Real Madrid/attacker3.png")
-        at3 = at3.resize((30, 60), 5)
-        at3_tk = ImageTk.PhotoImage(at3)
-
-        go1 = Image.open("Images/Team Players/Real Madrid/goalie1.png")
-        go1 = go1.resize((30, 60), 5)
-        go1_tk = ImageTk.PhotoImage(go1)
-
-        go2 = Image.open("Images/Team Players/Real Madrid/goalie2.png")
-        go2 = go2.resize((30, 60), 5)
-        go2_tk = ImageTk.PhotoImage(go2)
-
-        go3 = Image.open("Images/Team Players/Real Madrid/goalie3.png")
-        go3 = go3.resize((30, 60), 5)
-        go3_tk = ImageTk.PhotoImage(go3)
-
-    # manchester united
+        team_directory = "Real Madrid"
     else:
-        at1 = Image.open("Images/Team Players/Manchester United/attacker1.png")
-        at1 = at1.resize((30, 60), 5)
-        at1_tk = ImageTk.PhotoImage(at1)
+        team_directory = "Manchester United"
 
-        at2 = Image.open("Images/Team Players/Manchester United/attacker2.png")
-        at2 = at2.resize((30, 60), 5)
-        at2_tk = ImageTk.PhotoImage(at2)
+    at1 = Image.open(f"Images/Team Players/{team_directory}/attacker1.png")
+    at1 = at1.resize((30, 60), 5)
+    at1_tk = ImageTk.PhotoImage(at1)
 
-        at3 = Image.open("Images/Team Players/Manchester United/attacker3.png")
-        at3 = at3.resize((30, 60), 5)
-        at3_tk = ImageTk.PhotoImage(at3)
+    at2 = Image.open(f"Images/Team Players/{team_directory}/attacker2.png")
+    at2 = at2.resize((30, 60), 5)
+    at2_tk = ImageTk.PhotoImage(at2)
 
-        go1 = Image.open("Images/Team Players/Manchester United/goalie1.png")
-        go1 = go1.resize((30, 60), 5)
-        go1_tk = ImageTk.PhotoImage(go1)
+    at3 = Image.open(f"Images/Team Players/{team_directory}/attacker3.png")
+    at3 = at3.resize((30, 60), 5)
+    at3_tk = ImageTk.PhotoImage(at3)
 
-        go2 = Image.open("Images/Team Players/Manchester United/goalie2.png")
-        go2 = go2.resize((30, 60), 5)
-        go2_tk = ImageTk.PhotoImage(go2)
+    go1 = Image.open(f"Images/Team Players/{team_directory}/goalie1.png")
+    go1 = go1.resize((30, 60), 5)
+    go1_tk = ImageTk.PhotoImage(go1)
 
-        go3 = Image.open("Images/Team Players/Manchester United/goalie3.png")
-        go3 = go3.resize((30, 60), 5)
-        go3_tk = ImageTk.PhotoImage(go3)
+    go2 = Image.open(f"Images/Team Players/{team_directory}/goalie2.png")
+    go2 = go2.resize((30, 60), 5)
+    go2_tk = ImageTk.PhotoImage(go2)
+
+    go3 = Image.open(f"Images/Team Players/{team_directory}/goalie3.png")
+    go3 = go3.resize((30, 60), 5)
+    go3_tk = ImageTk.PhotoImage(go3)
+
 
     title_label = Label(window, text="Select an attacker and a goalie: ", font=font1, bg="black", fg="white")
     title_label.place(relx=0.5, rely=0.1, anchor=CENTER)
@@ -191,7 +146,8 @@ def characterSelectRun(root, SELECTED_TEAM):
 
     def gameWindow():
         selectSound()
-        gameRun(root, SELECTED_TEAM, SELECTED_ATTACKER, SELECTED_GOALIE)
+        window.destroy()
+        modeRun(root, SELECTED_TEAM, SELECTED_ATTACKER, SELECTED_GOALIE)
 
     set_attacker_button = Button(window, text="Set Attacker", font=font1, borderless=1, borderwidth=2, highlightthickness=3,
                          relief="raised",
