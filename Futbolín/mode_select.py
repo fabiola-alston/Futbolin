@@ -28,6 +28,7 @@ def modeRun(root, SELECTED_TEAM, SELECTED_ATTACKER, SELECTED_GOALIE):
         global GAME_MODE
         selectSound()
         window.destroy()
+        print(GOALIE_MODE)
         gameRun(root, SELECTED_TEAM, SELECTED_ATTACKER, SELECTED_GOALIE, GAME_MODE, GOALIE_MODE)
 
     def modeSelect(mode):
@@ -47,6 +48,7 @@ def modeRun(root, SELECTED_TEAM, SELECTED_ATTACKER, SELECTED_GOALIE):
             GOALIE_MODE = 2
         elif mode == 3:
             GOALIE_MODE = 3
+        print(GOALIE_MODE)
 
 
 

@@ -1,4 +1,5 @@
 from game_assets import *
+from board_data import randomBallData
 
 def gameRun(root, SELECTED_TEAM, SELECTED_ATTACKER, SELECTED_GOALIE, GAME_MODE, GOALIE_MODE):
     window = Toplevel(root)
@@ -45,12 +46,17 @@ def gameRun(root, SELECTED_TEAM, SELECTED_ATTACKER, SELECTED_GOALIE, GAME_MODE, 
     elif GOALIE_MODE == 3:
         goalie_mode = "AN3"
 
-
+    # round number
     global round_num
     round_num = 0
 
+    # limits amount of shots per round (1)
     global shot_flag
     shot_flag = 0
+
+    # score counter
+    global score
+    score = 0
 
     def closeGame():
         window.destroy()
@@ -72,7 +78,7 @@ def gameRun(root, SELECTED_TEAM, SELECTED_ATTACKER, SELECTED_GOALIE, GAME_MODE, 
                          activebackground="gray", padx=-20, command=closeWindow)
     back_button.place(x=20, y=20)
 
-    home_score_label = Label(game_canvas, text=f"{directory.upper()}: 0", font=font2, bg="black", fg="white")
+    home_score_label = Label(game_canvas, text=f"{directory.upper()}: {score}", font=font2, bg="black", fg="white")
     home_score_label.place(relx=0.18, rely=0.08, anchor=W)
 
     opp_score_label = Label(game_canvas, text=f"OPPONENT: 0", font=font2, bg="black", fg="white")
@@ -152,8 +158,9 @@ def gameRun(root, SELECTED_TEAM, SELECTED_ATTACKER, SELECTED_GOALIE, GAME_MODE, 
             time.sleep(0.025)
             game_canvas.update()
         time.sleep(1)
-        if round_num < 5 and GAME_MODE == 2:
-            roundTitleAnimation()
+        if round_num <= 5 and GAME_MODE == 2:
+            ballRandScore()
+            game_canvas.after(3000, roundTitleAnimation)
 
     global goalie_pos
     global goalie_pos2
@@ -163,7 +170,6 @@ def gameRun(root, SELECTED_TEAM, SELECTED_ATTACKER, SELECTED_GOALIE, GAME_MODE, 
         global goalie_pos
         global goalie_pos2
         global goalie_pos3
-        global GOALIE_MODE
 
         if GOALIE_MODE == 1:
             goalie_pos = random.randint(1,5)
@@ -197,7 +203,9 @@ def gameRun(root, SELECTED_TEAM, SELECTED_ATTACKER, SELECTED_GOALIE, GAME_MODE, 
 
         def deleteTitle():
             global title
+            global shot_flag
             title.destroy()
+            shot_flag = 0
         def displayTitle():
             global title
             title = Label(game_canvas, text=f"ROUND {round_num}", font=font3, bg="black", fg="blue")
@@ -205,12 +213,53 @@ def gameRun(root, SELECTED_TEAM, SELECTED_ATTACKER, SELECTED_GOALIE, GAME_MODE, 
             game_canvas.after(2000, deleteTitle)
 
         round_num += 1
-        shot_flag = 0
+
         if round_num <= 5:
             round_num_label['text'] = f"ROUND: {round_num}"
             displayTitle()
 
     roundTitleAnimation()
+
+    def goalAnimation():
+        global score
+        def deleteTitle():
+            global title
+            title.destroy()
+        def displayTitle():
+            global title
+            title = Label(game_canvas, text=f"GOAL", font=font3, bg="black", fg="blue")
+            title.place(relx=0.5, rely=0.5, anchor=CENTER)
+            game_canvas.after(2000, deleteTitle)
+
+        if round_num <= 5:
+            score += 1
+            home_score_label['text'] = f"{directory.upper()}: {score}"
+            displayTitle()
+
+    def noGoalAnimation():
+        def deleteTitle():
+            global title
+            title.destroy()
+        def displayTitle():
+            global title
+            title = Label(game_canvas, text=f"NO GOAL", font=font3, bg="black", fg="red")
+            title.place(relx=0.5, rely=0.5, anchor=CENTER)
+            game_canvas.after(2000, deleteTitle)
+
+        if round_num <= 5:
+            displayTitle()
+
+    def ballRandScore():
+        global goalie_pos
+        global goalie_pos2
+        global goalie_pos3
+
+        goal = randomBallData()
+        print(goal)
+        if goal == goalie_pos or goal == goalie_pos2 or goal == goalie_pos3:
+            noGoalAnimation()
+        else:
+            goalAnimation()
 
 
     # every round that is played, function
