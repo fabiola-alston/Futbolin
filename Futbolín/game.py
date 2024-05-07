@@ -141,6 +141,55 @@ def gameRun(root, SELECTED_TEAM, SELECTED_ATTACKER, SELECTED_GOALIE, GAME_MODE, 
     player3_tk = ImageTk.PhotoImage(player3_img)
     player3 = game_canvas.create_image((150, 480), anchor=NW, image=player3_tk)
 
+    def oppWin():
+        title = Label(game_canvas, text=f"OPPONENT WINS", font=font3, bg="black", fg="red")
+        title.place(relx=0.5, rely=0.5, anchor=CENTER)
+        game_canvas.update()
+        time.sleep(2)
+        game_canvas.update()
+        title.destroy()
+        game_canvas.update()
+
+    def homeWin():
+        title = Label(game_canvas, text=f"HOME WINS", font=font3, bg="black", fg="blue")
+        title.place(relx=0.5, rely=0.5, anchor=CENTER)
+        game_canvas.update()
+        time.sleep(2)
+        game_canvas.update()
+        title.destroy()
+        game_canvas.update()
+
+    def tie():
+        title = Label(game_canvas, text=f"TIE", font=font3, bg="black", fg="green")
+        title.place(relx=0.5, rely=0.5, anchor=CENTER)
+        game_canvas.update()
+        time.sleep(2)
+        game_canvas.update()
+        title.destroy()
+        game_canvas.update()
+
+    def nextTeam():
+        global score
+        opp_score = random.randint(0, 5)
+        opp_score_label['text'] = f"OPPONENT: {opp_score}"
+
+        title = Label(game_canvas, text=f"Opponent scored {opp_score} goals.", font=font3, bg="black", fg="red")
+        title.place(relx=0.5, rely=0.5, anchor=CENTER)
+        game_canvas.update()
+        time.sleep(2)
+        game_canvas.update()
+        title.destroy()
+        game_canvas.update()
+
+        if opp_score > score:
+            oppWin()
+
+        elif opp_score < score:
+            homeWin()
+
+        elif opp_score == score:
+            tie()
+
     def ballAnimation():
         global soccer_ball
         global round_num
@@ -159,8 +208,13 @@ def gameRun(root, SELECTED_TEAM, SELECTED_ATTACKER, SELECTED_GOALIE, GAME_MODE, 
             game_canvas.update()
         time.sleep(1)
         if round_num <= 5 and GAME_MODE == 2:
+            print("IN")
             ballRandScore()
             game_canvas.after(3000, roundTitleAnimation)
+
+        elif round_num <= 5 and GAME_MODE == 1:
+            ballRandScore()
+
 
     global goalie_pos
     global goalie_pos2
@@ -225,6 +279,8 @@ def gameRun(root, SELECTED_TEAM, SELECTED_ATTACKER, SELECTED_GOALIE, GAME_MODE, 
         def deleteTitle():
             global title
             title.destroy()
+            if round_num == 5:
+                game_canvas.after(1000, nextTeam)
         def displayTitle():
             global title
             title = Label(game_canvas, text=f"GOAL", font=font3, bg="black", fg="blue")
@@ -240,6 +296,8 @@ def gameRun(root, SELECTED_TEAM, SELECTED_ATTACKER, SELECTED_GOALIE, GAME_MODE, 
         def deleteTitle():
             global title
             title.destroy()
+            if round_num == 5:
+                game_canvas.after(1000, nextTeam)
         def displayTitle():
             global title
             title = Label(game_canvas, text=f"NO GOAL", font=font3, bg="black", fg="red")
@@ -275,7 +333,6 @@ def gameRun(root, SELECTED_TEAM, SELECTED_ATTACKER, SELECTED_GOALIE, GAME_MODE, 
                     shootSound()
                     shot_flag = 1
                     ballAnimation()
-
                 else:
                     dullSound()
             shootBall()
