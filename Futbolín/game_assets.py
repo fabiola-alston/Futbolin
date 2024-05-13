@@ -8,24 +8,6 @@ import serial
 
 pygame.mixer.init()
 
-# raspberry pi port id
-# rpi = serial.Serial(port="/dev/cu.usbmodem1401", baudrate=115200)
-#
-# try:
-#     rpi.Open()
-#     print("connected 1")
-# except:
-#     if rpi.isOpen():
-#         print("connected 2")
-#     else:
-#         print("not connected")
-#
-# while True:
-#     if rpi.isOpen():
-#         dt = rpi.readline()
-#         dt_str = dt.decode('UTF-8')
-#     print(dt_str)
-#     time.sleep(0.2)
 
 # select sound function
 def selectSound():
@@ -57,6 +39,7 @@ def booSound():
 font1 = ("retro gaming", 16)
 font2 = ("retro gaming", 14)
 font3 = ("retro gaming", 24)
+font4 = ("retro gaming", 20)
 
 # selected team variable
 # 0 = samurai blue
