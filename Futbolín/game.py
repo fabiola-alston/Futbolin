@@ -1,5 +1,6 @@
 from game_assets import *
 from board_data import randomBallData
+from statistics import statsRun
 
 def gameRun(root, SELECTED_TEAM, SELECTED_ATTACKER, SELECTED_GOALIE, GAME_MODE, GOALIE_MODE, SELECTED_TEAM2, SELECTED_ATTACKER2, SELECTED_GOALIE2):
     window = Toplevel(root)
@@ -148,6 +149,17 @@ def gameRun(root, SELECTED_TEAM, SELECTED_ATTACKER, SELECTED_GOALIE, GAME_MODE, 
     player3_tk = ImageTk.PhotoImage(player3_img)
     player3 = game_canvas.create_image((150, 480), anchor=NW, image=player3_tk)
 
+
+    def statsButtonClick():
+        selectSound()
+        statsRun(root, score, SELECTED_TEAM)
+
+    def statsButtonCreate():
+        stats_button = Button(window, text="Stats", font=font1, borderless=1, borderwidth=2, highlightthickness=3, relief="raised",
+                         bg="#ff0000", fg="white", overbackground="#ff5252", focuscolor="#ff0000", activebackground="#ff5252", command=statsButtonClick)
+        stats_button.place(relx=0.5, rely=0.9, anchor=CENTER)
+
+
     def oppWin():
         booSound()
         title = Label(game_canvas, text=f"OPPONENT WINS", font=font3, bg="black", fg="red")
@@ -192,12 +204,15 @@ def gameRun(root, SELECTED_TEAM, SELECTED_ATTACKER, SELECTED_GOALIE, GAME_MODE, 
 
         if opp_score > score:
             oppWin()
+            statsButtonCreate()
 
         elif opp_score < score:
             homeWin()
+            statsButtonCreate()
 
         elif opp_score == score:
             tie()
+            statsButtonCreate()
 
     def ballAnimation():
         global soccer_ball
